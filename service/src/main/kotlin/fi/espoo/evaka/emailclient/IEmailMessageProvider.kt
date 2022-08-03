@@ -4,23 +4,19 @@
 
 package fi.espoo.evaka.emailclient
 
-import fi.espoo.evaka.shared.AssistanceNeedDecisionId
-import fi.espoo.evaka.shared.ChildId
-
 interface IEmailMessageProvider {
 
-    val subjectForPendingDecisionEmail: String
     val subjectForClubApplicationReceivedEmail: String
     val subjectForDaycareApplicationReceivedEmail: String
     val subjectForPreschoolApplicationReceivedEmail: String
-    val subjectForAssistanceNeedDecisionEmail: String
+    val subjectForDecisionEmail: String
 
-    fun getPendingDecisionEmailSubject(): String {
-        return subjectForPendingDecisionEmail + getMessagePostfix()
+    fun getDecisionEmailSubject(): String {
+        return subjectForDecisionEmail + getMessagePostfix()
     }
 
-    fun getPendingDecisionEmailHtml(): String
-    fun getPendingDecisionEmailText(): String
+    fun getDecisionEmailHtml(): String
+    fun getDecisionEmailText(): String
 
     fun getClubApplicationReceivedEmailSubject(): String {
         return subjectForClubApplicationReceivedEmail + getMessagePostfix()
@@ -42,13 +38,6 @@ interface IEmailMessageProvider {
 
     fun getPreschoolApplicationReceivedEmailHtml(withinApplicationPeriod: Boolean): String
     fun getPreschoolApplicationReceivedEmailText(withinApplicationPeriod: Boolean): String
-
-    fun getAssistanceNeedDecisionEmailSubject(): String {
-        return subjectForAssistanceNeedDecisionEmail + getMessagePostfix()
-    }
-
-    fun getAssistanceNeedDecisionEmailHtml(childId: ChildId, decisionId: AssistanceNeedDecisionId): String
-    fun getAssistanceNeedDecisionEmailText(childId: ChildId, decisionId: AssistanceNeedDecisionId): String
 
     private fun getMessagePostfix(): String {
         return if (System.getenv("VOLTTI_ENV") == "staging") " [staging]" else ""

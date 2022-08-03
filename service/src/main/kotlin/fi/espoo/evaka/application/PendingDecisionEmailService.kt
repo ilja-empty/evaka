@@ -124,9 +124,9 @@ GROUP BY application.guardian_id
                 "${pendingDecision.guardianId} - ${pendingDecision.decisionIds.joinToString("-")}",
                 pendingDecision.email,
                 getFromAddress(lang),
-                emailMessageProvider.getPendingDecisionEmailSubject(),
-                emailMessageProvider.getPendingDecisionEmailHtml(),
-                emailMessageProvider.getPendingDecisionEmailText()
+                emailMessageProvider.getDecisionEmailSubject(),
+                emailMessageProvider.getDecisionEmailHtml(),
+                emailMessageProvider.getDecisionEmailText()
             )
 
             // Mark as sent

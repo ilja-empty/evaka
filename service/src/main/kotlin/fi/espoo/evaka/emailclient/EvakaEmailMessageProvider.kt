@@ -4,24 +4,20 @@
 
 package fi.espoo.evaka.emailclient
 
-import fi.espoo.evaka.shared.AssistanceNeedDecisionId
-import fi.espoo.evaka.shared.ChildId
-
 class EvakaEmailMessageProvider : IEmailMessageProvider {
 
-    override val subjectForPendingDecisionEmail: String = "Päätös varhaiskasvatuksesta / Beslut om förskoleundervisning / Decision on early childhood education"
     override val subjectForClubApplicationReceivedEmail: String = "Olemme vastaanottaneet hakemuksenne / Vi har tagit emot din ansökan / We have received your application"
     override val subjectForDaycareApplicationReceivedEmail: String = "Olemme vastaanottaneet hakemuksenne / Vi har tagit emot din ansökan / We have received your application"
     override val subjectForPreschoolApplicationReceivedEmail: String = "Olemme vastaanottaneet hakemuksenne / Vi har tagit emot din ansökan / We have received your application"
-    override val subjectForAssistanceNeedDecisionEmail: String = "Päätös tuen tarpeesta / Beslut om behov av stöd / Decision on support need"
+    override val subjectForDecisionEmail: String = "Uusi päätös eVakassa / Nytt beslut i eVaka / New decision on eVaka"
 
-    override fun getPendingDecisionEmailHtml(): String {
+    override fun getDecisionEmailHtml(): String {
         return """
             <p>
-            Sinulla on vastaamaton päätös Espoon varhaiskasvatukselta. Päätös tulee hyväksyä tai hylätä kahden viikon sisällä sen saapumisesta.
+            Sinulla on uusi päätös Espoon varhaiskasvatukselta.
             </p>
             <p>
-            Hakemuksen tekijä voi hyväksyä tai hylätä vastaamattomat päätökset kirjautumalla osoitteeseen <a href="https://espoonvarhaiskasvatus.fi">espoonvarhaiskasvatus.fi</a>, tai palauttamalla täytetyn lomakkeen päätöksen viimeiseltä sivulta siinä mainittuun osoitteeseen.
+            Voit tarkastella päätöstä kirjautumalla osoitteeseen <a href="https://espoonvarhaiskasvatus.fi">espoonvarhaiskasvatus.fi</a>.
             </p>
             <p>
             Tähän viestiin ei voi vastata. Tarvittaessa ole yhteydessä varhaiskasvatuksen palveluohjaukseen p. 09 816 31000
@@ -30,10 +26,10 @@ class EvakaEmailMessageProvider : IEmailMessageProvider {
             <hr>
 
             <p>
-            Du har ett obesvarat beslut av småbarnspedagogiken i Esbo. Beslutet ska godkännas eller förkastas inom två veckor från att det inkommit.
+            Du har ett nytt beslut av småbarnspedagogiken i Esbo.
             </p>
             <p>
-            Den som lämnat in ansökan kan godkänna eller förkasta obesvarade beslut genom att logga in på adressen <a href="https://esbosmabarnspedagogik.fi">esbosmabarnspedagogik.fi</a> eller genom att returnera den ifyllda blanketten som finns på sista sidan av beslutet till den adress som nämns på sidan.
+            Du kan se beslutet genom att logga in på adressen <a href="https://esbosmabarnspedagogik.fi">esbosmabarnspedagogik.fi</a>.
             </p>
             <p>
             Detta meddelande kan inte besvaras. Kontakta vid behov servicehandledningen inom småbarnspedagogiken, tfn 09 816 27600
@@ -42,10 +38,10 @@ class EvakaEmailMessageProvider : IEmailMessageProvider {
             <hr>
 
             <p>
-            You have an unanswered decision from Espoo’s early childhood education. The decision must be accepted or rejected within two weeks of receiving it.
+            You have a new decision from Espoo’s early childhood education.
             </p>
             <p>
-            The person who submitted the application can accept or reject an unanswered decision by logging in to <a href="espoonvarhaiskasvatus.fi">espoonvarhaiskasvatus.fi</a> or by sending the completed form on the last page of the decision to the address specified on the page.
+            You can view the decision by logging in to <a href="espoonvarhaiskasvatus.fi">espoonvarhaiskasvatus.fi</a>.
             </p>
             <p>
             You cannot reply to this message. If you have questions, please contact early childhood education service counselling, tel. 09 816 31000.
@@ -53,27 +49,27 @@ class EvakaEmailMessageProvider : IEmailMessageProvider {
         """.trimIndent()
     }
 
-    override fun getPendingDecisionEmailText(): String {
+    override fun getDecisionEmailText(): String {
         return """
-            Sinulla on vastaamaton päätös Espoon varhaiskasvatukselta. Päätös tulee hyväksyä tai hylätä kahden viikon sisällä sen saapumisesta.
+            Sinulla on uusi päätös Espoon varhaiskasvatukselta.
 
-            Hakemuksen tekijä voi hyväksyä tai hylätä vastaamattomat päätökset kirjautumalla osoitteeseen https://espoonvarhaiskasvatus.fi, tai palauttamalla täytetyn lomakkeen päätöksen viimeiseltä sivulta siinä mainittuun osoitteeseen.
+            Voit tarkastella päätöstä kirjautumalla osoitteeseen https://espoonvarhaiskasvatus.fi.
 
             Tähän viestiin ei voi vastata. Tarvittaessa ole yhteydessä varhaiskasvatuksen palveluohjaukseen p. 09 816 31000
 
             -----
 
-            Du har ett obesvarat beslut av småbarnspedagogiken i Esbo. Beslutet ska godkännas eller förkastas inom två veckor från att det inkommit.
+            Du har ett nytt beslut av småbarnspedagogiken i Esbo.
 
-            Den som lämnat in ansökan kan godkänna eller förkasta obesvarade beslut genom att logga in på adressen https://esbosmabarnspedagogik.fi eller genom att returnera den ifyllda blanketten som finns på sista sidan av beslutet till den adress som nämns på sidan.
+            Du kan se beslutet genom att logga in på adressen https://esbosmabarnspedagogik.fi.
 
             Detta meddelande kan inte besvaras. Kontakta vid behov servicehandledningen inom småbarnspedagogiken, tfn 09 816 27600
 
             -----
 
-            You have an unanswered decision from Espoo’s early childhood education. The decision must be accepted or rejected within two weeks of receiving it.
+            You have a new decision from Espoo’s early childhood education.
 
-            The person who submitted the application can accept or reject an unanswered decision by logging in to espoonvarhaiskasvatus.fi or by sending the completed form on the last page of the decision to the address specified on the page.
+            You can view the decision by logging in to https://espoonvarhaiskasvatus.fi.
 
             You cannot reply to this message. If you have questions, please contact early childhood education service counselling, tel. 09 816 31000.
         """.trimIndent()
@@ -516,45 +512,4 @@ class EvakaEmailMessageProvider : IEmailMessageProvider {
                 Information about applying to private early childhood education units: https://www.espoo.fi/en/childcare-and-education/early-childhood-education/private-early-childhood-education-and-day-care-centers
             """.trimIndent()
     }
-
-    override fun getAssistanceNeedDecisionEmailHtml(
-        childId: ChildId,
-        decisionId: AssistanceNeedDecisionId
-    ): String = """
-        <p>Hyvä(t) huoltaja(t),</p>
-        <p>Lapsellenne on tehty päätös tuen tarpeesta.</p>
-        <p>Päätös on nähtävissä eVakassa osoitteessa <a href="https://www.espoonvarhaiskasvatus.fi/children/$childId/assistance-need-decision/$decisionId">https://www.espoonvarhaiskasvatus.fi/children/$childId/assistance-need-decision/$decisionId</a>.</p>
-        <hr>
-        <p>Bästa vårdnadshavare,</p>
-        <p>Beslut har fattats om ditt barns behov av stöd.</p>
-        <p>Beslutet finns att se i eVaka på <a href="https://www.esbosmabarnspedagogik.fi/children/$childId/assistance-need-decision/$decisionId">https://www.esbosmabarnspedagogik.fi/children/$childId/assistance-need-decision/$decisionId</a>.</p>
-        <hr>
-        <p>Dear guardian(s),</p>
-        <p>A decision has been made on your child's need for support.</p>
-        <p>The decision can be viewed on eVaka at <a href="https://www.espoonvarhaiskasvatus.fi/children/$childId/assistance-need-decision/$decisionId">https://www.espoonvarhaiskasvatus.fi/children/$childId/assistance-need-decision/$decisionId</a>.</p>
-    """.trimIndent()
-
-    override fun getAssistanceNeedDecisionEmailText(childId: ChildId, decisionId: AssistanceNeedDecisionId): String = """
-        Hyvä(t) huoltaja(t),
-        
-        Lapsellenne on tehty päätös tuen tarpeesta.
-        
-        Päätös on nähtävissä eVakassa osoitteessa https://www.espoonvarhaiskasvatus.fi/children/$childId/assistance-need-decision/$decisionId.
-        
-        -----
-        
-        Bästa vårdnadshavare,
-        
-        Beslut har fattats om ditt barns behov av stöd.
-        
-        Beslutet finns att se i eVaka på https://www.esbosmabarnspedagogik.fi/children/$childId/assistance-need-decision/$decisionId.
-        
-        -----
-        
-        Dear guardian(s),
-        
-        A decision has been made on your child's need for support.
-        
-        The decision can be viewed on eVaka at https://www.espoonvarhaiskasvatus.fi/children/$childId/assistance-need-decision/$decisionId.
-    """.trimIndent()
 }
