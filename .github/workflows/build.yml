@@ -14,6 +14,10 @@ env:
   ECR_PUBLIC_REGISTRY: public.ecr.aws/p6g0g5e1
   AWS_REGION: eu-west-1
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   lint-shell:
     runs-on: ubuntu-latest
