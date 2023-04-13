@@ -5,6 +5,8 @@
 package fi.espoo.evaka.holidayperiod
 
 import fi.espoo.evaka.Audit
+import fi.espoo.evaka.daycare.service.deleteAllCitizenEditableAbsencesInRange
+import fi.espoo.evaka.reservations.deleteAllReservationsInRange
 import fi.espoo.evaka.shared.HolidayPeriodId
 import fi.espoo.evaka.shared.auth.AuthenticatedUser
 import fi.espoo.evaka.shared.db.Database
@@ -83,6 +85,8 @@ class HolidayPeriodController(private val accessControl: AccessControl) {
                         Action.Global.CREATE_HOLIDAY_PERIOD
                     )
                     try {
+                        it.deleteAllReservationsInRange(body.period)
+                        it.deleteAllCitizenEditableAbsencesInRange(body.period)
                         it.createHolidayPeriod(body.period, body.reservationDeadline)
                     } catch (e: Exception) {
                         throw mapPSQLException(e)
